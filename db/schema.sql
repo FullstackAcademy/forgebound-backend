@@ -14,6 +14,7 @@ CREATE TABLE campaigns (
   title text NOT NULL,
   description text,
   cover_image text,
+  invite_code text UNIQUE,
   created_at timestamp NOT NULL DEFAULT now(),
   updated_at timestamp NOT NULL DEFAULT now()
 );
