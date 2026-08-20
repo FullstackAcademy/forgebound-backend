@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS campaign_members;
 DROP TABLE IF EXISTS campaigns;
 DROP TABLE IF EXISTS users;
 
@@ -15,4 +16,12 @@ CREATE TABLE campaigns (
   cover_image text,
   created_at timestamp NOT NULL DEFAULT now(),
   updated_at timestamp NOT NULL DEFAULT now()
+);
+
+CREATE TABLE campaign_members (
+  id serial PRIMARY KEY,
+  campaign_id integer NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  role text NOT NULL CHECK (role IN ('GM', 'Player')),
+  UNIQUE (campaign_id, user_id)
 );
